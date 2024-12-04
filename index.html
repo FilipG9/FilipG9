@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Frase del giorno</title>
+    <style>
+        /* Imposta il font */
+        @import url('https://fonts.googleapis.com/css2?family=Castoro&display=swap');
+
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            height: 100vh;
+            background-color:white; /* Colore verde di Siria */
+            font-family: 'Castoro regular', serif;
+            color: #007d71;
+            flex-direction: column;
+            text-align: center;
+            overflow: hidden; /* Evita lo scroll */
+            opacity: 0; /* Partenza invisibile */
+            animation: fadeIn 1.5s ease-in-out forwards; /* Animazione */
+
+        }
+
+        @keyframes fadeIn {
+            0% {
+                opacity: 0; /* Inizio invisibile */
+            }
+            100% {
+                opacity: 1; /* Fine completamente visibile */
+            }
+        }
+
+
+        .quote {
+            font-size: 2.4rem;
+            margin: 10px;
+            padding: 20px;
+        }
+
+        .logo {
+            position: absolute;
+            bottom: 20px;
+            width: 200px; /* Dimensioni del logo */
+        
+            /* Per schermi molto piccoli */
+
+/* Per schermi molto piccoli */
+@media (max-width: 480px) {
+    .quote {
+        font-size: 1.5rem; /* Rimpicciolisce il testo */
+        padding: 5px; /* Riduce il margine */
+    }
+
+    .logo {
+        width: 60px; /* Rimpicciolisce il logo */
+    }
+
+
+/* Per schermi molto grandi */
+@media (min-width: 1200px) {
+    .quote {
+        font-size: 3.5rem; /* Ingrandisce il testo */
+    }
+
+    .logo {
+        width: 50px; /* Ingrandisce il logo */
+    }
+}
+.quote, .logo {
+    animation: fadeIn 1.5s ease-in-out forwards;
+}
+}
+        
+        }
+
+    </style>
+</head>
+<body>
+    <div class="quote" id="quote">La tua frase apparirà qui</div>
+    <img src="logo-siria.png" alt="Logo Siria" class="logo">
+    <script>
+const phrases = [
+    "La salute è la vera ricchezza e non pezzi d’oro e d’argento. – Mahatma Gandhi",
+    "Prendersi cura del proprio corpo è l’unico posto in cui si deve vivere. – Jim Rohn",
+    "La salute non è tutto, ma senza salute tutto è niente. – Arthur Schopenhauer",
+    "La salute è uno stato di completo benessere fisico, mentale e sociale, e non meramente l’assenza di malattia o infermità. – Organizzazione Mondiale della Sanità",
+    "Ciò che facciamo ripetutamente ci rende ciò che siamo. – Aristotele",
+    "Il più grande errore di tutti è pensare che siamo vivi quando non siamo nient’altro che sassi che si muovono con una certa velocità. – Franz Kafka",
+    "Chi non ha tempo per la salute dovrà trovare tempo per la malattia. – Giovanni Verga",
+    "Il corpo guarisce con il gioco, la mente guarisce con la risata e lo spirito guarisce con la gioia. – Proverbio indiano",
+    "La salute è il primo dovere della vita. – Oscar Wilde",
+    "La felicità è la salute dell’anima. – Aristotele",
+    "Non c’è niente di più pericoloso di un’abitudine abitudinaria. – William James",
+    "Il modo migliore per mantenere una buona salute è fare ciò che si teme. – Ralph Waldo Emerson",
+    "Siamo ciò che facciamo ripetutamente. L’eccellenza non è un atto, ma un’abitudine. – Aristotele",
+    "La prevenzione è meglio della cura. – Erasmo da Rotterdam",
+    "L’energia e la perseveranza conquistano tutte le cose. – Benjamin Franklin",
+    "Camminare è la migliore medicina per l’uomo. – Ippocrate",
+    "Non c’è medicina migliore del riposo e del sonno. – Benjamin Franklin",
+    "Mangiare bene è una forma di rispetto verso se stessi. – Sophia Loren",
+    "Il movimento è la medicina del cambiamento. – Ezra Taft Benson",
+    "Non esiste cura migliore per il corpo di una mente serena. – Napoleone Bonaparte",
+    "Il segreto della salute sia mentale che fisica è vivere nel presente. – Buddha",
+    "La felicità consiste soprattutto nell’accettare i propri limiti. – Seneca",
+    "Le malattie del corpo sono spesso lo specchio delle malattie dell’anima. – Ippocrate",
+    "La salute e l’allegria si nutrono a vicenda. – Joseph Addison",
+    "L’amore e la salute sono l’unica felicità vera. – Henri Beyle Stendhal",
+    "Cerca di mantenere sempre un pezzo di cielo sopra la tua vita. – Marcel Proust",
+    "La calma è la via più breve per la guarigione. – Friedrich Nietzsche",
+    "Sii felice, sii in salute, sii gentile. – Dalai Lama",
+    "Non esiste medicina migliore dell’amore e della bontà. – Madre Teresa di Calcutta",
+    "La serenità interiore è la prima condizione della salute. – Carl Gustav Jung",
+    "La salute è il risultato di uno stile di vita sano. – Lao Tzu",
+    "Mangia come se fossi un re a colazione, un principe a pranzo e un povero a cena. – Adelle Davis",
+    "Il vero segreto della felicità è apprezzare ciò che si ha. – Socrate",
+    "La salute non è semplicemente assenza di malattia. – T. Colin Campbell",
+    "Ogni cambiamento inizia dall’interno. – Norman Vincent Peale",
+    "Un uomo è ciò che mangia. – Ludwig Feuerbach",
+    "La più grande ricchezza è la salute. – Virgilio",
+    "La mente serena è una delle chiavi della salute. – Euripide",
+    "Il nostro corpo è il giardino della nostra anima. – William Shakespeare",
+    "Non basta aggiungere anni alla vita; è necessario aggiungere vita agli anni. – John F. Kennedy",
+    "Se non si è disposti a cambiare ciò che si fa, non si otterrà mai nulla di diverso. – Zig Ziglar",
+    "Prendi il controllo del tuo corpo per poter controllare la tua mente. – Platone",
+    "La felicità è un profumo che non puoi versare sugli altri senza riceverne alcune gocce su di te. – Ralph Waldo Emerson",
+    "Il vero viaggio di scoperta non consiste nel cercare nuove terre, ma nell’avere nuovi occhi. – Marcel Proust",
+    "È necessario che il corpo si rinvigorisca per rinforzare lo spirito. – Seneca",
+    "Chi tiene alla propria salute, si tiene lontano dalla sedentarietà. – Ippocrate",
+    "La vita è come andare in bicicletta: per mantenere l’equilibrio, devi muoverti. – Albert Einstein",
+    "Sii gentile con te stesso, questo è il primo passo verso una salute duratura. – Thich Nhat Hanh",
+    "Non contare i giorni, fai sì che i giorni contino. – Muhammad Ali",
+    "Ciò che pensiamo, diventiamo. – Buddha"
+];
+
+
+        function getRandomPhrase() {
+            const randomIndex = Math.floor(Math.random() * phrases.length);
+            return phrases[randomIndex];
+        }
+
+        document.getElementById('quote').textContent = getRandomPhrase();
+    </script>
+</body>
+</html>
